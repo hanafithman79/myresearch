@@ -15,7 +15,7 @@ fitted on the training folds only.
 | `objective1_rigor.py` | Bootstrap 95% CIs, seed stability, permutation importance |
 | `objective1_figures.py` | Figures 1-9 |
 
-Put `dataset.csv` in the working directory, then run a script with `python <script>.py`.
+`dataset.csv` (12,411 students, 45 variables) is included. Run any script from the repository root with `python <script>.py`.
 To redraw the figures:
 `python objective1_figures.py results/ablations results/figures results/objective1b results/rigor`
 
