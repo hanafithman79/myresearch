@@ -480,7 +480,8 @@ def inverse_class_weights(y: np.ndarray, n_classes: int) -> np.ndarray:
     return w.astype(np.float32)
 
 
-def train_torch_model(model_cls, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va, n_classes, class_w, seed):
+def train_torch_model(model_cls, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va, n_classes, class_w, seed,
+                      return_model=False):
     set_seed(seed)
     model = model_cls(Xs_tr.shape[1], Xseq_tr.shape[2], n_classes).to(DEVICE)
     criterion = nn.CrossEntropyLoss(weight=torch.tensor(class_w, device=DEVICE))
@@ -509,6 +510,8 @@ def train_torch_model(model_cls, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va, n_classes
             xs = torch.from_numpy(Xs_va[i:i + 1024]).to(DEVICE)
             xt = torch.from_numpy(Xseq_va[i:i + 1024]).to(DEVICE)
             probs.append(F.softmax(model(xs, xt), dim=1).cpu().numpy())
+    if return_model:
+        return np.vstack(probs), model
     return np.vstack(probs)
 
 
@@ -568,7 +571,8 @@ def compute_metrics(probs, y_true, y_macro_true, label_to_macro_idx, n_macro, gr
 def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
                    temporal_features=TEMPORAL_FEATURES, time_steps=TIME_STEPS,
                    summary_csv=SUMMARY_CSV, fold_csv=FOLD_CSV, title="OBJECTIVE 1",
-                   oof_npz=None, target_label="Macro-Track", models=None, seed_offset=0):
+                   oof_npz=None, target_label="Macro-Track", models=None, seed_offset=0,
+                   cv_seed=SEED):
     """Stratified 5-fold CV of every model in MODEL_REGISTRY.
 
     label_col       : column the models are trained on (majors, grouped majors or tracks).
@@ -581,6 +585,7 @@ def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
                       (e.g. "Saber Pro quartile" when that column holds another target).
     models          : optional subset of MODEL_REGISTRY names to run (default: all).
     seed_offset     : added to the torch seeds, for seed-stability reruns.
+    cv_seed         : random_state of the fold split (repeated cross-validation).
     """
     registry = {k: MODEL_REGISTRY[k] for k in models} if models else MODEL_REGISTRY
     t0 = time.time()
@@ -609,7 +614,7 @@ def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
               "it will be missing from some validation folds.")
 
     continuous, nominal = split_static_types(df)
-    skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=SEED)
+    skf = StratifiedKFold(n_splits=N_SPLITS, shuffle=True, random_state=cv_seed)
     records = []
     model_names = list(registry)
     oof = np.zeros((len(model_names), len(df), n_classes), dtype=np.float32)

@@ -1,0 +1,67 @@
+Model,Feature,Mean |SHAP|,Share of total
+HistGradientBoosting,GENDER,0.30439,0.17727
+HistGradientBoosting,ENG_S11,0.17876,0.10411
+HistGradientBoosting,BIO_S11,0.14503,0.08446
+HistGradientBoosting,STEM_AVG,0.13691,0.07974
+HistGradientBoosting,CC_S11,0.10144,0.05908
+HistGradientBoosting,MAT_S11,0.0861,0.05014
+HistGradientBoosting,STEM_HUM_RATIO,0.07775,0.04528
+HistGradientBoosting,CR_S11,0.06754,0.03934
+HistGradientBoosting,OCC_FATHER,0.065,0.03786
+HistGradientBoosting,HUM_AVG,0.06494,0.03782
+HistGradientBoosting,STRATUM,0.06138,0.03575
+HistGradientBoosting,SCHOOL_NAT,0.06073,0.03537
+HistGradientBoosting,SCHOOL_TYPE,0.05102,0.02971
+HistGradientBoosting,EDU_FATHER,0.04986,0.02904
+HistGradientBoosting,PEOPLE_HOUSE,0.04613,0.02687
+HistGradientBoosting,OCC_MOTHER,0.04539,0.02643
+HistGradientBoosting,REVENUE,0.04425,0.02577
+HistGradientBoosting,EDU_MOTHER,0.03781,0.02202
+HistGradientBoosting,SISBEN,0.03415,0.01989
+HistGradientBoosting,CAR,0.02234,0.01301
+HistGradientBoosting,INTERNET,0.02063,0.01201
+HistGradientBoosting,COMPUTER,0.0155,0.00903
+Logistic Regression,GENDER,0.30217,0.18951
+Logistic Regression,BIO_S11,0.11763,0.07377
+Logistic Regression,ENG_S11,0.10982,0.06888
+Logistic Regression,STRATUM,0.08919,0.05594
+Logistic Regression,MAT_S11,0.0831,0.05212
+Logistic Regression,OCC_FATHER,0.07913,0.04962
+Logistic Regression,EDU_FATHER,0.07245,0.04544
+Logistic Regression,SCHOOL_NAT,0.07123,0.04467
+Logistic Regression,CC_S11,0.06776,0.0425
+Logistic Regression,STEM_HUM_RATIO,0.06657,0.04175
+Logistic Regression,EDU_MOTHER,0.06271,0.03933
+Logistic Regression,REVENUE,0.05996,0.0376
+Logistic Regression,SCHOOL_TYPE,0.05744,0.03602
+Logistic Regression,PEOPLE_HOUSE,0.05498,0.03448
+Logistic Regression,OCC_MOTHER,0.0544,0.03412
+Logistic Regression,SISBEN,0.05426,0.03403
+Logistic Regression,STEM_AVG,0.04902,0.03075
+Logistic Regression,HUM_AVG,0.04074,0.02555
+Logistic Regression,CAR,0.03764,0.02361
+Logistic Regression,INTERNET,0.02654,0.01665
+Logistic Regression,CR_S11,0.02118,0.01329
+Logistic Regression,COMPUTER,0.01658,0.0104
+Proposed: MLP + Causal TCN + LSTM,GENDER,0.0639,0.16563
+Proposed: MLP + Causal TCN + LSTM,OCC_FATHER,0.02412,0.06251
+Proposed: MLP + Causal TCN + LSTM,ENG_S11,0.02347,0.06083
+Proposed: MLP + Causal TCN + LSTM,STRATUM,0.02232,0.05786
+Proposed: MLP + Causal TCN + LSTM,EDU_FATHER,0.0209,0.05417
+Proposed: MLP + Causal TCN + LSTM,REVENUE,0.02025,0.0525
+Proposed: MLP + Causal TCN + LSTM,EDU_MOTHER,0.01976,0.05123
+Proposed: MLP + Causal TCN + LSTM,BIO_S11,0.01941,0.05031
+Proposed: MLP + Causal TCN + LSTM,OCC_MOTHER,0.01911,0.04954
+Proposed: MLP + Causal TCN + LSTM,PEOPLE_HOUSE,0.01864,0.04831
+Proposed: MLP + Causal TCN + LSTM,SCHOOL_NAT,0.01652,0.04281
+Proposed: MLP + Causal TCN + LSTM,SCHOOL_TYPE,0.01398,0.03625
+Proposed: MLP + Causal TCN + LSTM,STEM_HUM_RATIO,0.01395,0.03617
+Proposed: MLP + Causal TCN + LSTM,SISBEN,0.01362,0.03531
+Proposed: MLP + Causal TCN + LSTM,CAR,0.0131,0.03395
+Proposed: MLP + Causal TCN + LSTM,INTERNET,0.01175,0.03046
+Proposed: MLP + Causal TCN + LSTM,MAT_S11,0.01159,0.03004
+Proposed: MLP + Causal TCN + LSTM,CC_S11,0.0108,0.028
+Proposed: MLP + Causal TCN + LSTM,STEM_AVG,0.00828,0.02145
+Proposed: MLP + Causal TCN + LSTM,COMPUTER,0.00809,0.02098
+Proposed: MLP + Causal TCN + LSTM,HUM_AVG,0.00699,0.01811
+Proposed: MLP + Causal TCN + LSTM,CR_S11,0.00524,0.01358

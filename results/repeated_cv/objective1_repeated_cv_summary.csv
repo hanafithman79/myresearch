@@ -1,0 +1,12 @@
+﻿Category,Model,Accuracy (%),Accuracy (%) 95% CI,Macro-F1,Macro-F1 95% CI,Macro-F1 gain over majority,Macro-F1 ratio to majority,Proposed minus model (Macro-F1),p vs Proposed (corrected),p vs majority (corrected)
+0: Reference,Majority Class (reference),43.57,43.55-43.58,0.1517,0.1517-0.1518,0.0,1.0,0.1519,1.19e-16,
+A: Traditional ML,Logistic Regression,45.31,44.56-46.05,0.3122,0.3029-0.3216,0.1605,2.06,-0.0086,0.315,3.06e-22
+A: Traditional ML,Random Forest,44.5,43.73-45.28,0.2919,0.2832-0.3007,0.1402,1.92,0.0117,0.143,1.57e-21
+A: Traditional ML,HistGradientBoosting,43.62,42.58-44.67,0.3102,0.2984-0.3219,0.1585,2.04,-0.0066,0.526,9.27e-20
+B: Single-Branch Deep,Static MLP Only,41.83,40.57-43.10,0.2818,0.2686-0.2951,0.1301,1.86,0.0218,0.0005,1.28e-16
+B: Single-Branch Deep,Standalone LSTM,44.17,43.62-44.72,0.2166,0.2059-0.2273,0.0649,1.43,0.087,7.97e-11,5.35e-12
+C: Hybrid Baseline,Hybrid 1: MLP + CNN + LSTM,43.72,42.37-45.07,0.3028,0.2850-0.3207,0.1511,2.0,0.0008,0.878,3.58e-15
+C: Hybrid Baseline,Hybrid 2: MLP + BiLSTM,43.93,43.01-44.85,0.3044,0.2855-0.3233,0.1526,2.01,-0.0007,0.907,1.04e-14
+C: Hybrid Baseline,Hybrid 3: MLP + GRU,43.68,42.49-44.86,0.3047,0.2870-0.3224,0.153,2.01,-0.0011,0.852,2.29e-15
+C: Hybrid Baseline,Hybrid 4: MLP + Transformer,43.54,42.59-44.50,0.3008,0.2835-0.3182,0.1491,1.98,0.0028,0.652,2.68e-15
+D: Proposed,Proposed: MLP + Causal TCN + LSTM,43.56,42.45-44.67,0.3036,0.2882-0.3190,0.1519,2.0,,,1.19e-16
