@@ -1,0 +1,25 @@
+Experiment,Model,Seed offset,Accuracy (%),Macro-F1
+E6,Hybrid 3: MLP + GRU,0,44.09,0.3124
+E6,Logistic Regression,0,45.21,0.3109
+E6,Majority Class (reference),0,43.5662,0.1517
+E6,Proposed: MLP + Causal TCN + LSTM,0,43.7838,0.3103
+E6,Hybrid 3: MLP + GRU,1000,43.3891,0.3031
+E6,Logistic Regression,1000,45.21,0.3109
+E6,Majority Class (reference),1000,43.5662,0.1517
+E6,Proposed: MLP + Causal TCN + LSTM,1000,43.3972,0.31
+E6,Hybrid 3: MLP + GRU,2000,43.6629,0.2983
+E6,Logistic Regression,2000,45.21,0.3109
+E6,Majority Class (reference),2000,43.5662,0.1517
+E6,Proposed: MLP + Causal TCN + LSTM,2000,44.2591,0.305
+P1,Hybrid 3: MLP + GRU,0,61.4133,0.4923
+P1,Logistic Regression,0,62.912,0.503
+P1,Majority Class (reference),0,50.8984,0.1687
+P1,Proposed: MLP + Causal TCN + LSTM,0,61.236,0.4862
+P1,Hybrid 3: MLP + GRU,1000,61.7115,0.4874
+P1,Logistic Regression,1000,62.912,0.503
+P1,Majority Class (reference),1000,50.8984,0.1687
+P1,Proposed: MLP + Causal TCN + LSTM,1000,61.9854,0.4899
+P1,Hybrid 3: MLP + GRU,2000,61.7114,0.4851
+P1,Logistic Regression,2000,62.912,0.503
+P1,Majority Class (reference),2000,50.8984,0.1687
+P1,Proposed: MLP + Causal TCN + LSTM,2000,61.9853,0.4897

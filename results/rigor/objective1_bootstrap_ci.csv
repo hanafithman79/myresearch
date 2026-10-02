@@ -1,0 +1,49 @@
+﻿Target,Model,Accuracy (%),Accuracy 95% CI,Macro-F1,Macro-F1 95% CI
+Grouped majors (16),Majority Class (reference),42.8491,42.0-43.7,0.0375,0.037-0.038
+Grouped majors (16),Logistic Regression,43.2922,42.5-44.2,0.0696,0.067-0.073
+Grouped majors (16),Random Forest,42.5429,41.7-43.4,0.0611,0.059-0.063
+Grouped majors (16),HistGradientBoosting,41.3424,40.5-42.2,0.069,0.066-0.072
+Grouped majors (16),Static MLP Only,42.4462,41.6-43.3,0.0576,0.056-0.059
+Grouped majors (16),Standalone LSTM,42.9699,42.1-43.8,0.0418,0.041-0.043
+Grouped majors (16),Hybrid 1: MLP + CNN + LSTM,42.3334,41.5-43.2,0.0662,0.064-0.069
+Grouped majors (16),Hybrid 2: MLP + BiLSTM,42.422,41.6-43.3,0.0654,0.063-0.068
+Grouped majors (16),Hybrid 3: MLP + GRU,42.6718,41.8-43.5,0.0683,0.066-0.071
+Grouped majors (16),Hybrid 4: MLP + Transformer,42.3656,41.6-43.2,0.0622,0.060-0.064
+Grouped majors (16),Proposed: MLP + Causal TCN + LSTM,42.2851,41.4-43.1,0.0673,0.065-0.070
+Grouped majors (16),Proposed minus Logistic Regression,,,-0.0023,-0.005 to 0.001
+Macro-track (4),Majority Class (reference),43.5662,42.8-44.5,0.1517,0.150-0.154
+Macro-track (4),Logistic Regression,45.2099,44.3-46.1,0.3111,0.302-0.321
+Macro-track (4),Random Forest,44.2833,43.4-45.1,0.2907,0.284-0.297
+Macro-track (4),HistGradientBoosting,43.0344,42.2-43.9,0.3066,0.298-0.315
+Macro-track (4),Static MLP Only,41.5116,40.6-42.4,0.2824,0.275-0.290
+Macro-track (4),Standalone LSTM,44.3075,43.4-45.3,0.2201,0.214-0.226
+Macro-track (4),Hybrid 1: MLP + CNN + LSTM,43.7273,42.8-44.6,0.3087,0.300-0.317
+Macro-track (4),Hybrid 2: MLP + BiLSTM,43.7999,42.9-44.7,0.309,0.300-0.318
+Macro-track (4),Hybrid 3: MLP + GRU,44.0899,43.2-44.9,0.314,0.305-0.323
+Macro-track (4),Hybrid 4: MLP + Transformer,43.4212,42.5-44.3,0.2975,0.289-0.305
+Macro-track (4),Proposed: MLP + Causal TCN + LSTM,43.7837,42.9-44.6,0.3115,0.303-0.320
+Macro-track (4),Proposed minus Hybrid 3: MLP + GRU,,,-0.0024,-0.010 to 0.006
+Saber Pro quartile (4),Majority Class (reference),50.8984,50.0-51.8,0.1687,0.167-0.171
+Saber Pro quartile (4),Logistic Regression,62.9119,62.1-63.8,0.5031,0.492-0.514
+Saber Pro quartile (4),Random Forest,62.364,61.6-63.2,0.5029,0.492-0.514
+Saber Pro quartile (4),HistGradientBoosting,61.6469,60.8-62.5,0.4962,0.485-0.507
+Saber Pro quartile (4),Static MLP Only,49.0371,48.2-50.0,0.2813,0.273-0.290
+Saber Pro quartile (4),Standalone LSTM,64.0077,63.2-64.9,0.5224,0.511-0.533
+Saber Pro quartile (4),Hybrid 1: MLP + CNN + LSTM,61.4455,60.6-62.3,0.4926,0.483-0.503
+Saber Pro quartile (4),Hybrid 2: MLP + BiLSTM,61.4858,60.7-62.3,0.4942,0.484-0.505
+Saber Pro quartile (4),Hybrid 3: MLP + GRU,61.4133,60.5-62.3,0.4935,0.482-0.504
+Saber Pro quartile (4),Hybrid 4: MLP + Transformer,60.4867,59.7-61.4,0.4688,0.458-0.480
+Saber Pro quartile (4),Proposed: MLP + Causal TCN + LSTM,61.236,60.4-62.1,0.4884,0.478-0.499
+Saber Pro quartile (4),Proposed minus Standalone LSTM,,,-0.0337,-0.045 to -0.023
+Saber Pro top quartile (2),Majority Class (reference),50.8984,50.1-51.7,0.3373,0.334-0.341
+Saber Pro top quartile (2),Logistic Regression,80.6462,80.0-81.3,0.8064,0.800-0.813
+Saber Pro top quartile (2),Random Forest,80.1466,79.5-80.8,0.8013,0.795-0.808
+Saber Pro top quartile (2),HistGradientBoosting,79.9372,79.3-80.6,0.7992,0.792-0.806
+Saber Pro top quartile (2),Static MLP Only,60.4625,59.6-61.4,0.6044,0.596-0.613
+Saber Pro top quartile (2),Standalone LSTM,80.9846,80.3-81.6,0.8096,0.803-0.816
+Saber Pro top quartile (2),Hybrid 1: MLP + CNN + LSTM,79.6068,78.9-80.3,0.796,0.789-0.803
+Saber Pro top quartile (2),Hybrid 2: MLP + BiLSTM,79.4859,78.8-80.2,0.7947,0.788-0.802
+Saber Pro top quartile (2),Hybrid 3: MLP + GRU,78.9542,78.2-79.6,0.7895,0.782-0.796
+Saber Pro top quartile (2),Hybrid 4: MLP + Transformer,79.0347,78.3-79.7,0.7902,0.783-0.797
+Saber Pro top quartile (2),Proposed: MLP + Causal TCN + LSTM,79.0025,78.3-79.7,0.7899,0.782-0.797
+Saber Pro top quartile (2),Proposed minus Standalone LSTM,,,-0.0199,-0.025 to -0.014

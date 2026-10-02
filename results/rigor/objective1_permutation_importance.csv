@@ -1,0 +1,45 @@
+Experiment,Target,Feature,Macro-F1 drop (mean),Macro-F1 drop (sd over folds)
+E6,Macro-Track,GENDER,0.02849,0.00586
+E6,Macro-Track,BIO_S11,0.01668,0.00957
+E6,Macro-Track,ENG_S11,0.00905,0.00595
+E6,Macro-Track,STEM_AVG,0.00838,0.00692
+E6,Macro-Track,CC_S11,0.00529,0.00569
+E6,Macro-Track,HUM_AVG,0.00407,0.00419
+E6,Macro-Track,SCHOOL_NAT,0.00185,0.00366
+E6,Macro-Track,OCC_FATHER,0.00095,0.00836
+E6,Macro-Track,SCHOOL_TYPE,-0.00013,0.00323
+E6,Macro-Track,EDU_FATHER,-0.00015,0.00211
+E6,Macro-Track,PEOPLE_HOUSE,-0.00022,0.00401
+E6,Macro-Track,STRATUM,-0.00023,0.004
+E6,Macro-Track,INTERNET,-0.00039,0.00213
+E6,Macro-Track,CAR,-0.00094,0.00337
+E6,Macro-Track,COMPUTER,-0.00108,0.00224
+E6,Macro-Track,REVENUE,-0.00136,0.00378
+E6,Macro-Track,SISBEN,-0.00165,0.00505
+E6,Macro-Track,CR_S11,-0.00236,0.0018
+E6,Macro-Track,OCC_MOTHER,-0.00331,0.00365
+E6,Macro-Track,STEM_HUM_RATIO,-0.00413,0.00463
+E6,Macro-Track,EDU_MOTHER,-0.00504,0.0055
+E6,Macro-Track,MAT_S11,-0.00693,0.00877
+P1,Saber Pro quartile,ENG_S11,0.07032,0.0101
+P1,Saber Pro quartile,BIO_S11,0.05646,0.01893
+P1,Saber Pro quartile,STEM_AVG,0.05224,0.02027
+P1,Saber Pro quartile,MAT_S11,0.04263,0.01841
+P1,Saber Pro quartile,CC_S11,0.01733,0.00626
+P1,Saber Pro quartile,HUM_AVG,0.0167,0.00721
+P1,Saber Pro quartile,CR_S11,0.01598,0.0046
+P1,Saber Pro quartile,STEM_HUM_RATIO,0.00834,0.01358
+P1,Saber Pro quartile,INTERNET,0.00271,0.00366
+P1,Saber Pro quartile,CAR,0.00112,0.00114
+P1,Saber Pro quartile,SISBEN,0.00068,0.00137
+P1,Saber Pro quartile,OCC_MOTHER,0.00032,0.00237
+P1,Saber Pro quartile,REVENUE,0.00025,0.00418
+P1,Saber Pro quartile,COMPUTER,1e-05,0.00343
+P1,Saber Pro quartile,SCHOOL_NAT,-0.0006,0.00118
+P1,Saber Pro quartile,GENDER,-0.00109,0.00182
+P1,Saber Pro quartile,SCHOOL_TYPE,-0.0013,0.00201
+P1,Saber Pro quartile,STRATUM,-0.0016,0.00472
+P1,Saber Pro quartile,EDU_FATHER,-0.00258,0.00311
+P1,Saber Pro quartile,PEOPLE_HOUSE,-0.00357,0.00291
+P1,Saber Pro quartile,EDU_MOTHER,-0.00498,0.00712
+P1,Saber Pro quartile,OCC_FATHER,-0.00607,0.00583

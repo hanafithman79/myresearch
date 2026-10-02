@@ -1,0 +1,466 @@
+[CI] Grouped majors (16) done
+[CI] Macro-track (4) done
+[CI] Saber Pro quartile (4) done
+[CI] Saber Pro top quartile (2) done
+                    Target                              Model  Accuracy (%) Accuracy 95% CI  Macro-F1  Macro-F1 95% CI
+       Grouped majors (16)         Majority Class (reference)       42.8491       42.0-43.7    0.0375      0.037-0.038
+       Grouped majors (16)                Logistic Regression       43.2922       42.5-44.2    0.0696      0.067-0.073
+       Grouped majors (16)                      Random Forest       42.5429       41.7-43.4    0.0611      0.059-0.063
+       Grouped majors (16)               HistGradientBoosting       41.3424       40.5-42.2    0.0690      0.066-0.072
+       Grouped majors (16)                    Static MLP Only       42.4462       41.6-43.3    0.0576      0.056-0.059
+       Grouped majors (16)                    Standalone LSTM       42.9699       42.1-43.8    0.0418      0.041-0.043
+       Grouped majors (16)         Hybrid 1: MLP + CNN + LSTM       42.3334       41.5-43.2    0.0662      0.064-0.069
+       Grouped majors (16)             Hybrid 2: MLP + BiLSTM       42.4220       41.6-43.3    0.0654      0.063-0.068
+       Grouped majors (16)                Hybrid 3: MLP + GRU       42.6718       41.8-43.5    0.0683      0.066-0.071
+       Grouped majors (16)        Hybrid 4: MLP + Transformer       42.3656       41.6-43.2    0.0622      0.060-0.064
+       Grouped majors (16)  Proposed: MLP + Causal TCN + LSTM       42.2851       41.4-43.1    0.0673      0.065-0.070
+       Grouped majors (16) Proposed minus Logistic Regression           NaN             NaN   -0.0023  -0.005 to 0.001
+           Macro-track (4)         Majority Class (reference)       43.5662       42.8-44.5    0.1517      0.150-0.154
+           Macro-track (4)                Logistic Regression       45.2099       44.3-46.1    0.3111      0.302-0.321
+           Macro-track (4)                      Random Forest       44.2833       43.4-45.1    0.2907      0.284-0.297
+           Macro-track (4)               HistGradientBoosting       43.0344       42.2-43.9    0.3066      0.298-0.315
+           Macro-track (4)                    Static MLP Only       41.5116       40.6-42.4    0.2824      0.275-0.290
+           Macro-track (4)                    Standalone LSTM       44.3075       43.4-45.3    0.2201      0.214-0.226
+           Macro-track (4)         Hybrid 1: MLP + CNN + LSTM       43.7273       42.8-44.6    0.3087      0.300-0.317
+           Macro-track (4)             Hybrid 2: MLP + BiLSTM       43.7999       42.9-44.7    0.3090      0.300-0.318
+           Macro-track (4)                Hybrid 3: MLP + GRU       44.0899       43.2-44.9    0.3140      0.305-0.323
+           Macro-track (4)        Hybrid 4: MLP + Transformer       43.4212       42.5-44.3    0.2975      0.289-0.305
+           Macro-track (4)  Proposed: MLP + Causal TCN + LSTM       43.7837       42.9-44.6    0.3115      0.303-0.320
+           Macro-track (4) Proposed minus Hybrid 3: MLP + GRU           NaN             NaN   -0.0024  -0.010 to 0.006
+    Saber Pro quartile (4)         Majority Class (reference)       50.8984       50.0-51.8    0.1687      0.167-0.171
+    Saber Pro quartile (4)                Logistic Regression       62.9119       62.1-63.8    0.5031      0.492-0.514
+    Saber Pro quartile (4)                      Random Forest       62.3640       61.6-63.2    0.5029      0.492-0.514
+    Saber Pro quartile (4)               HistGradientBoosting       61.6469       60.8-62.5    0.4962      0.485-0.507
+    Saber Pro quartile (4)                    Static MLP Only       49.0371       48.2-50.0    0.2813      0.273-0.290
+    Saber Pro quartile (4)                    Standalone LSTM       64.0077       63.2-64.9    0.5224      0.511-0.533
+    Saber Pro quartile (4)         Hybrid 1: MLP + CNN + LSTM       61.4455       60.6-62.3    0.4926      0.483-0.503
+    Saber Pro quartile (4)             Hybrid 2: MLP + BiLSTM       61.4858       60.7-62.3    0.4942      0.484-0.505
+    Saber Pro quartile (4)                Hybrid 3: MLP + GRU       61.4133       60.5-62.3    0.4935      0.482-0.504
+    Saber Pro quartile (4)        Hybrid 4: MLP + Transformer       60.4867       59.7-61.4    0.4688      0.458-0.480
+    Saber Pro quartile (4)  Proposed: MLP + Causal TCN + LSTM       61.2360       60.4-62.1    0.4884      0.478-0.499
+    Saber Pro quartile (4)     Proposed minus Standalone LSTM           NaN             NaN   -0.0337 -0.045 to -0.023
+Saber Pro top quartile (2)         Majority Class (reference)       50.8984       50.1-51.7    0.3373      0.334-0.341
+Saber Pro top quartile (2)                Logistic Regression       80.6462       80.0-81.3    0.8064      0.800-0.813
+Saber Pro top quartile (2)                      Random Forest       80.1466       79.5-80.8    0.8013      0.795-0.808
+Saber Pro top quartile (2)               HistGradientBoosting       79.9372       79.3-80.6    0.7992      0.792-0.806
+Saber Pro top quartile (2)                    Static MLP Only       60.4625       59.6-61.4    0.6044      0.596-0.613
+Saber Pro top quartile (2)                    Standalone LSTM       80.9846       80.3-81.6    0.8096      0.803-0.816
+Saber Pro top quartile (2)         Hybrid 1: MLP + CNN + LSTM       79.6068       78.9-80.3    0.7960      0.789-0.803
+Saber Pro top quartile (2)             Hybrid 2: MLP + BiLSTM       79.4859       78.8-80.2    0.7947      0.788-0.802
+Saber Pro top quartile (2)                Hybrid 3: MLP + GRU       78.9542       78.2-79.6    0.7895      0.782-0.796
+Saber Pro top quartile (2)        Hybrid 4: MLP + Transformer       79.0347       78.3-79.7    0.7902      0.783-0.797
+Saber Pro top quartile (2)  Proposed: MLP + Causal TCN + LSTM       79.0025       78.3-79.7    0.7899      0.782-0.797
+Saber Pro top quartile (2)     Proposed minus Standalone LSTM           NaN             NaN   -0.0199 -0.025 to -0.014
+[Data] Loaded 12,411 rows x 45 columns.
+[Data] 12,411 rows after filtering | 21 programs | 4 macro-tracks
+[Data] Macro-track distribution:
+MACRO_TRACK
+Industrial & Management          5407
+Civil & Infrastructure           3481
+Mechanical, Electrical & Tech    2522
+Chemical & Process               1001
+[Importance] E6 done
+[Importance] P1 done
+Experiment             Target        Feature  Macro-F1 drop (mean)  Macro-F1 drop (sd over folds)
+        E6        Macro-Track         GENDER               0.02849                        0.00586
+        E6        Macro-Track        BIO_S11               0.01668                        0.00957
+        E6        Macro-Track        ENG_S11               0.00905                        0.00595
+        E6        Macro-Track       STEM_AVG               0.00838                        0.00692
+        E6        Macro-Track         CC_S11               0.00529                        0.00569
+        E6        Macro-Track        HUM_AVG               0.00407                        0.00419
+        E6        Macro-Track     SCHOOL_NAT               0.00185                        0.00366
+        E6        Macro-Track     OCC_FATHER               0.00095                        0.00836
+        P1 Saber Pro quartile        ENG_S11               0.07032                        0.01010
+        P1 Saber Pro quartile        BIO_S11               0.05646                        0.01893
+        P1 Saber Pro quartile       STEM_AVG               0.05224                        0.02027
+        P1 Saber Pro quartile        MAT_S11               0.04263                        0.01841
+        P1 Saber Pro quartile         CC_S11               0.01733                        0.00626
+        P1 Saber Pro quartile        HUM_AVG               0.01670                        0.00721
+        P1 Saber Pro quartile         CR_S11               0.01598                        0.00460
+        P1 Saber Pro quartile STEM_HUM_RATIO               0.00834                        0.01358
+[Data] Loaded 12,411 rows x 45 columns.
+[Data] 12,411 rows after filtering | 21 programs | 4 macro-tracks
+[Data] Macro-track distribution:
+MACRO_TRACK
+Industrial & Management          5407
+Civil & Infrastructure           3481
+Mechanical, Electrical & Tech    2522
+Chemical & Process               1001
+
+########################################################################################################################
+SEED STABILITY E6 seed offset 0
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  43.58% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  43.74% F1 0.3070 |   1.9s
+  Hybrid 3: MLP + GRU                  | Track  42.85% F1 0.2942 |   8.0s
+  Proposed: MLP + Causal TCN + LSTM    | Track  43.05% F1 0.2966 |   7.9s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.59% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  44.96% F1 0.3022 |   4.7s
+  Hybrid 3: MLP + GRU                  | Track  43.88% F1 0.3219 |   6.1s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.12% F1 0.3233 |   8.2s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.69% F1 0.3184 |   2.7s
+  Hybrid 3: MLP + GRU                  | Track  43.84% F1 0.3222 |   7.3s
+  Proposed: MLP + Causal TCN + LSTM    | Track  43.59% F1 0.2999 |   9.1s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.81% F1 0.3149 |   4.6s
+  Hybrid 3: MLP + GRU                  | Track  45.65% F1 0.3376 |   6.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.12% F1 0.3325 |   8.4s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.85% F1 0.3122 |   4.9s
+  Hybrid 3: MLP + GRU                  | Track  44.24% F1 0.2862 |   6.4s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.04% F1 0.2989 |   8.4s
+
+========================================================================================================================
+SEED STABILITY E6 seed offset 0 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Macro-Track Top-1 Acc (%) Macro-Track Macro-F1 p-value vs Proposed (Macro-Track Macro-F1)
+      0: Reference        Majority Class (reference)              43.57 ± 0.02      0.1517 ± 0.0000                            2.751e-05 (***)
+ A: Traditional ML               Logistic Regression              45.21 ± 0.90      0.3109 ± 0.0064                              0.9383 (n.s.)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU              44.09 ± 1.01      0.3124 ± 0.0215                              0.7263 (n.s.)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM              43.78 ± 0.46      0.3103 ± 0.0165                                          —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Macro-Track Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Macro-Track Macro-F1 model: Hybrid 3: MLP + GRU (0.3124 ± 0.0215)
+Proposed model targets: Macro-Track Top-1 > 80% -> 43.78% (NOT MET)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.6 min
+
+########################################################################################################################
+SEED STABILITY E6 seed offset 1000
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  43.58% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  43.74% F1 0.3070 |   2.5s
+  Hybrid 3: MLP + GRU                  | Track  41.40% F1 0.3052 |   6.9s
+  Proposed: MLP + Causal TCN + LSTM    | Track  40.56% F1 0.3047 |   8.4s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.59% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  44.96% F1 0.3022 |   4.5s
+  Hybrid 3: MLP + GRU                  | Track  44.76% F1 0.3120 |   6.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.60% F1 0.3262 |   8.1s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.69% F1 0.3184 |   5.3s
+  Hybrid 3: MLP + GRU                  | Track  42.51% F1 0.2956 |   6.5s
+  Proposed: MLP + Causal TCN + LSTM    | Track  43.23% F1 0.3020 |   8.2s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.81% F1 0.3149 |   3.7s
+  Hybrid 3: MLP + GRU                  | Track  45.00% F1 0.2988 |   6.0s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.96% F1 0.3070 |   8.6s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.85% F1 0.3122 |   2.6s
+  Hybrid 3: MLP + GRU                  | Track  43.27% F1 0.3040 |   5.9s
+  Proposed: MLP + Causal TCN + LSTM    | Track  43.63% F1 0.3098 |   8.1s
+
+========================================================================================================================
+SEED STABILITY E6 seed offset 1000 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Macro-Track Top-1 Acc (%) Macro-Track Macro-F1 p-value vs Proposed (Macro-Track Macro-F1)
+      0: Reference        Majority Class (reference)              43.57 ± 0.02      0.1517 ± 0.0000                            3.104e-06 (***)
+ A: Traditional ML               Logistic Regression              45.21 ± 0.90      0.3109 ± 0.0064                              0.8917 (n.s.)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU              43.39 ± 1.52      0.3031 ± 0.0063                                0.04449 (*)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM              43.40 ± 1.74      0.3100 ± 0.0095                                          —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Macro-Track Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Macro-Track Macro-F1 model: Logistic Regression (0.3109 ± 0.0064)
+Proposed model targets: Macro-Track Top-1 > 80% -> 43.40% (NOT MET)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.5 min
+
+########################################################################################################################
+SEED STABILITY E6 seed offset 2000
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  43.58% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  43.74% F1 0.3070 |   4.4s
+  Hybrid 3: MLP + GRU                  | Track  43.54% F1 0.2887 |   6.5s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.38% F1 0.2980 |   8.2s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.59% F1 0.1518 |   0.0s
+  Logistic Regression                  | Track  44.96% F1 0.3022 |   4.8s
+  Hybrid 3: MLP + GRU                  | Track  44.52% F1 0.3017 |   6.4s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.68% F1 0.3110 |   8.1s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.69% F1 0.3184 |   3.7s
+  Hybrid 3: MLP + GRU                  | Track  43.80% F1 0.2899 |   6.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.20% F1 0.2909 |   8.4s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.81% F1 0.3149 |   3.8s
+  Hybrid 3: MLP + GRU                  | Track  43.15% F1 0.3234 |   6.1s
+  Proposed: MLP + Causal TCN + LSTM    | Track  43.31% F1 0.3216 |   8.4s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  43.55% F1 0.1517 |   0.0s
+  Logistic Regression                  | Track  45.85% F1 0.3122 |   3.5s
+  Hybrid 3: MLP + GRU                  | Track  43.31% F1 0.2879 |   6.8s
+  Proposed: MLP + Causal TCN + LSTM    | Track  44.72% F1 0.3033 |   9.5s
+
+========================================================================================================================
+SEED STABILITY E6 seed offset 2000 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Macro-Track Top-1 Acc (%) Macro-Track Macro-F1 p-value vs Proposed (Macro-Track Macro-F1)
+      0: Reference        Majority Class (reference)              43.57 ± 0.02      0.1517 ± 0.0000                            8.532e-06 (***)
+ A: Traditional ML               Logistic Regression              45.21 ± 0.90      0.3109 ± 0.0064                              0.4135 (n.s.)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU              43.66 ± 0.54      0.2983 ± 0.0151                             0.09984 (n.s.)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM              44.26 ± 0.57      0.3050 ± 0.0119                                          —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Macro-Track Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Macro-Track Macro-F1 model: Logistic Regression (0.3109 ± 0.0064)
+Proposed model targets: Macro-Track Top-1 > 80% -> 44.26% (NOT MET)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.6 min
+
+########################################################################################################################
+SEED STABILITY P1 seed offset 0
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  50.91% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.30% F1 0.5159 |   1.6s
+  Hybrid 3: MLP + GRU                  | Track  60.61% F1 0.4859 |   6.5s
+  Proposed: MLP + Causal TCN + LSTM    | Track  60.85% F1 0.4940 |   8.7s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.93% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.65% F1 0.4916 |   2.8s
+  Hybrid 3: MLP + GRU                  | Track  61.28% F1 0.4944 |   6.5s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.60% F1 0.4994 |   8.2s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  62.73% F1 0.4908 |   3.0s
+  Hybrid 3: MLP + GRU                  | Track  62.09% F1 0.4925 |   5.9s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.00% F1 0.4662 |   8.0s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.38% F1 0.5103 |   2.4s
+  Hybrid 3: MLP + GRU                  | Track  62.01% F1 0.5043 |   7.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.00% F1 0.4859 |   8.6s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.50% F1 0.5066 |   2.9s
+  Hybrid 3: MLP + GRU                  | Track  61.08% F1 0.4844 |   6.4s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.72% F1 0.4854 |   8.9s
+
+========================================================================================================================
+SEED STABILITY P1 seed offset 0 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Saber Pro quartile Top-1 Acc (%) Saber Pro quartile Macro-F1 p-value vs Proposed (Saber Pro quartile Macro-F1)
+      0: Reference        Majority Class (reference)                     50.90 ± 0.02             0.1687 ± 0.0000                                   5.915e-07 (***)
+ A: Traditional ML               Logistic Regression                     62.91 ± 0.51             0.5030 ± 0.0113                                     0.0532 (n.s.)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU                     61.41 ± 0.63             0.4923 ± 0.0079                                     0.4207 (n.s.)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM                     61.24 ± 0.40             0.4862 ± 0.0126                                                 —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Saber Pro quartile Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Saber Pro quartile Macro-F1 model: Logistic Regression (0.5030 ± 0.0113)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.5 min
+
+########################################################################################################################
+SEED STABILITY P1 seed offset 1000
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  50.91% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.30% F1 0.5159 |   2.1s
+  Hybrid 3: MLP + GRU                  | Track  60.81% F1 0.4917 |   6.9s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.54% F1 0.5056 |   8.3s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.93% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.65% F1 0.4916 |   3.6s
+  Hybrid 3: MLP + GRU                  | Track  62.33% F1 0.4874 |   6.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  62.93% F1 0.4836 |   7.9s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  62.73% F1 0.4908 |   4.5s
+  Hybrid 3: MLP + GRU                  | Track  61.80% F1 0.4779 |   6.7s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.56% F1 0.4779 |   8.3s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.38% F1 0.5103 |   3.3s
+  Hybrid 3: MLP + GRU                  | Track  61.52% F1 0.4939 |   6.4s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.56% F1 0.4996 |   8.1s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.50% F1 0.5066 |   2.2s
+  Hybrid 3: MLP + GRU                  | Track  62.09% F1 0.4858 |   6.1s
+  Proposed: MLP + Causal TCN + LSTM    | Track  62.33% F1 0.4827 |   8.1s
+
+========================================================================================================================
+SEED STABILITY P1 seed offset 1000 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Saber Pro quartile Top-1 Acc (%) Saber Pro quartile Macro-F1 p-value vs Proposed (Saber Pro quartile Macro-F1)
+      0: Reference        Majority Class (reference)                     50.90 ± 0.02             0.1687 ± 0.0000                                   4.679e-07 (***)
+ A: Traditional ML               Logistic Regression                     62.91 ± 0.51             0.5030 ± 0.0113                                     0.009226 (**)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU                     61.71 ± 0.59             0.4874 ± 0.0062                                     0.4852 (n.s.)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM                     61.99 ± 0.63             0.4899 ± 0.0120                                                 —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Saber Pro quartile Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Saber Pro quartile Macro-F1 model: Logistic Regression (0.5030 ± 0.0113)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.5 min
+
+########################################################################################################################
+SEED STABILITY P1 seed offset 2000
+########################################################################################################################
+[Setup] labels=MACRO_TRACK (4 classes) | weighted=False | temporal=(B, 2, 4) ['MAT_S11', 'CR_S11', 'CC_S11', 'BIO_S11', 'ENG_S11', 'STEM_AVG', 'HUM_AVG', 'STEM_HUM_RATIO']
+
+==============================================================================
+FOLD 1/5  (train=9,928, val=2,483)
+==============================================================================
+  Majority Class (reference)           | Track  50.91% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.30% F1 0.5159 |   1.7s
+  Hybrid 3: MLP + GRU                  | Track  61.54% F1 0.5026 |   7.1s
+  Proposed: MLP + Causal TCN + LSTM    | Track  62.06% F1 0.5063 |   7.8s
+
+==============================================================================
+FOLD 2/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.93% F1 0.1687 |   0.0s
+  Logistic Regression                  | Track  62.65% F1 0.4916 |   2.1s
+  Hybrid 3: MLP + GRU                  | Track  62.49% F1 0.4890 |   6.9s
+  Proposed: MLP + Causal TCN + LSTM    | Track  62.53% F1 0.4975 |   8.5s
+
+==============================================================================
+FOLD 3/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  62.73% F1 0.4908 |   3.7s
+  Hybrid 3: MLP + GRU                  | Track  61.97% F1 0.4781 |   6.8s
+  Proposed: MLP + Causal TCN + LSTM    | Track  62.29% F1 0.4809 |   8.9s
+
+==============================================================================
+FOLD 4/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.38% F1 0.5103 |   4.1s
+  Hybrid 3: MLP + GRU                  | Track  61.68% F1 0.4763 |   6.8s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.76% F1 0.4765 |   9.2s
+
+==============================================================================
+FOLD 5/5  (train=9,929, val=2,482)
+==============================================================================
+  Majority Class (reference)           | Track  50.89% F1 0.1686 |   0.0s
+  Logistic Regression                  | Track  63.50% F1 0.5066 |   2.5s
+  Hybrid 3: MLP + GRU                  | Track  60.88% F1 0.4793 |   7.0s
+  Proposed: MLP + Causal TCN + LSTM    | Track  61.28% F1 0.4874 |   8.7s
+
+========================================================================================================================
+SEED STABILITY P1 seed offset 2000 - SUMMARY (5-fold stratified CV, Mean ± Std)
+========================================================================================================================
+          Category                             Model Saber Pro quartile Top-1 Acc (%) Saber Pro quartile Macro-F1 p-value vs Proposed (Saber Pro quartile Macro-F1)
+      0: Reference        Majority Class (reference)                     50.90 ± 0.02             0.1687 ± 0.0000                                   4.951e-07 (***)
+ A: Traditional ML               Logistic Regression                     62.91 ± 0.51             0.5030 ± 0.0113                                     0.1113 (n.s.)
+C: Hybrid Baseline               Hybrid 3: MLP + GRU                     61.71 ± 0.59             0.4851 ± 0.0110                                       0.04293 (*)
+       D: Proposed Proposed: MLP + Causal TCN + LSTM                     61.99 ± 0.48             0.4897 ± 0.0122                                                 —
+
+Significance: paired t-test (scipy.stats.ttest_rel) on fold-wise Saber Pro quartile Macro-F1, df=4. * p<0.05, ** p<0.01, *** p<0.001, n.s. not significant.
+
+Best Saber Pro quartile Macro-F1 model: Logistic Regression (0.5030 ± 0.0113)
+
+Saved: /dev/null (summary), /dev/null (fold-wise raw metrics)
+Runtime: 1.5 min
+Experiment                             Model  acc_mean  acc_sd  f1_mean  f1_sd
+        E6               Hybrid 3: MLP + GRU   43.7140  0.3532   0.3046 0.0072
+        E6               Logistic Regression   45.2100  0.0000   0.3109 0.0000
+        E6        Majority Class (reference)   43.5662  0.0000   0.1517 0.0000
+        E6 Proposed: MLP + Causal TCN + LSTM   43.8134  0.4317   0.3084 0.0030
+        P1               Hybrid 3: MLP + GRU   61.6121  0.1721   0.4882 0.0037
+        P1               Logistic Regression   62.9120  0.0000   0.5030 0.0000
+        P1        Majority Class (reference)   50.8984  0.0000   0.1687 0.0000
+        P1 Proposed: MLP + Causal TCN + LSTM   61.7356  0.4326   0.4886 0.0021

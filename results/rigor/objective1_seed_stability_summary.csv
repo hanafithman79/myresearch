@@ -1,0 +1,9 @@
+Experiment,Model,acc_mean,acc_sd,f1_mean,f1_sd
+E6,Hybrid 3: MLP + GRU,43.714,0.3532,0.3046,0.0072
+E6,Logistic Regression,45.21,0.0,0.3109,0.0
+E6,Majority Class (reference),43.5662,0.0,0.1517,0.0
+E6,Proposed: MLP + Causal TCN + LSTM,43.8134,0.4317,0.3084,0.003
+P1,Hybrid 3: MLP + GRU,61.6121,0.1721,0.4882,0.0037
+P1,Logistic Regression,62.912,0.0,0.503,0.0
+P1,Majority Class (reference),50.8984,0.0,0.1687,0.0
+P1,Proposed: MLP + Causal TCN + LSTM,61.7356,0.4326,0.4886,0.0021

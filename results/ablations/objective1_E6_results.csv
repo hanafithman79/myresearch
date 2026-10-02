@@ -1,0 +1,12 @@
+﻿Category,Model,Macro-Track Top-1 Acc (%),Macro-Track Macro-F1,p-value vs Proposed (Macro-Track Macro-F1)
+0: Reference,Majority Class (reference),43.57 ± 0.02,0.1517 ± 0.0000,2.751e-05 (***)
+A: Traditional ML,Logistic Regression,45.21 ± 0.90,0.3109 ± 0.0064,0.9383 (n.s.)
+A: Traditional ML,Random Forest,44.28 ± 0.91,0.2907 ± 0.0110,0.03238 (*)
+A: Traditional ML,HistGradientBoosting,43.03 ± 1.58,0.3064 ± 0.0187,0.7087 (n.s.)
+B: Single-Branch Deep,Static MLP Only,41.51 ± 1.17,0.2820 ± 0.0150,0.001289 (**)
+B: Single-Branch Deep,Standalone LSTM,44.31 ± 0.28,0.2197 ± 0.0098,0.0005493 (***)
+C: Hybrid Baseline,Hybrid 1: MLP + CNN + LSTM,43.73 ± 0.56,0.3080 ± 0.0155,0.4326 (n.s.)
+C: Hybrid Baseline,Hybrid 2: MLP + BiLSTM,43.80 ± 0.50,0.3073 ± 0.0108,0.5827 (n.s.)
+C: Hybrid Baseline,Hybrid 3: MLP + GRU,44.09 ± 1.01,0.3124 ± 0.0215,0.7263 (n.s.)
+C: Hybrid Baseline,Hybrid 4: MLP + Transformer,43.42 ± 0.54,0.2961 ± 0.0185,0.0001665 (***)
+D: Proposed,Proposed: MLP + Causal TCN + LSTM,43.78 ± 0.46,0.3103 ± 0.0165,—
