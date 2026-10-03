@@ -1,0 +1,12 @@
+﻿Category,Model,Saber Pro top half Top-1 Acc (%),Saber Pro top half Macro-F1,p-value vs Proposed (Saber Pro top half Macro-F1)
+0: Reference,Majority Class (reference),76.24 ± 0.02,0.4326 ± 0.0001,6.729e-07 (***)
+A: Traditional ML,Logistic Regression,84.88 ± 0.55,0.7756 ± 0.0107,0.01044 (*)
+A: Traditional ML,Random Forest,84.43 ± 0.35,0.7677 ± 0.0051,0.03732 (*)
+A: Traditional ML,HistGradientBoosting,84.62 ± 0.59,0.7720 ± 0.0085,0.02229 (*)
+B: Single-Branch Deep,Static MLP Only,73.56 ± 1.03,0.5439 ± 0.0149,3.924e-07 (***)
+B: Single-Branch Deep,Standalone LSTM,85.00 ± 0.32,0.7739 ± 0.0037,0.01408 (*)
+C: Hybrid Baseline,Hybrid 1: MLP + CNN + LSTM,83.26 ± 0.39,0.7511 ± 0.0123,0.6806 (n.s.)
+C: Hybrid Baseline,Hybrid 2: MLP + BiLSTM,83.24 ± 0.58,0.7493 ± 0.0101,0.8374 (n.s.)
+C: Hybrid Baseline,Hybrid 3: MLP + GRU,83.43 ± 0.53,0.7517 ± 0.0079,0.4478 (n.s.)
+C: Hybrid Baseline,Hybrid 4: MLP + Transformer,82.90 ± 0.57,0.7482 ± 0.0110,0.9178 (n.s.)
+D: Proposed,Proposed: MLP + Causal TCN + LSTM,83.21 ± 0.67,0.7489 ± 0.0130,—

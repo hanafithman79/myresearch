@@ -15,7 +15,8 @@ total mean |SHAP| (averaged over the 4 classes), which makes rankings comparable
 
 Outputs: objective1_shap_importance.csv, objective1_shap_by_class.csv,
          fig10_shap_importance.png, fig11_shap_by_class.png
-Usage:   python objective1_shap.py [OUT_DIR]   (dataset.csv in the working directory)
+Usage:   python objective1_shap.py [OUT_DIR] [E6|P2]   (dataset.csv in the working directory)
+         P2 explains the Saber Pro top-quartile target instead (Objective 1b; figure 13).
 """
 
 import os
@@ -40,6 +41,9 @@ from objective1_ablations import SABER_PRO_FEATURES  # noqa: E402
 
 warnings.filterwarnings("ignore")
 OUT = sys.argv[1] if len(sys.argv) > 1 else "."
+TARGET = sys.argv[2].upper() if len(sys.argv) > 2 else "E6"   # E6 = 4 tracks, P2 = Saber Pro top quartile
+SUFFIX = "" if TARGET == "E6" else f"_{TARGET}"
+WHAT = "4-track model" if TARGET == "E6" else "Saber Pro top-quartile model"
 os.makedirs(OUT, exist_ok=True)
 NO_PRO = [f for f in base.TEMPORAL_FEATURES if f not in SABER_PRO_FEATURES]
 TIME_STEPS = 2
@@ -110,6 +114,10 @@ class ProbWrapper(torch.nn.Module):
 def main():
     base.set_seed(base.SEED)
     df = base.load_and_prepare(base.DATA_PATH)
+    if TARGET != "E6":
+        from objective1b_performance import EXPERIMENTS as PERF
+        df = df[df["QUARTILE"].notna()].reset_index(drop=True)
+        df[base.MACRO_TARGET] = PERF[TARGET]["make"](df["QUARTILE"])
     classes = sorted(df[base.MACRO_TARGET].unique())
     y = df[base.MACRO_TARGET].map({c: i for i, c in enumerate(classes)}).values
     k = len(classes)
@@ -170,9 +178,9 @@ def main():
             for vi, v in enumerate(var_names):
                 by_class.append({"Feature": v, **{c: norm[vi, ci] for ci, c in enumerate(classes)}})
     imp = pd.DataFrame(rows).sort_values(["Model", "Share of total"], ascending=[True, False])
-    imp.round(5).to_csv(os.path.join(OUT, "objective1_shap_importance.csv"), index=False)
+    imp.round(5).to_csv(os.path.join(OUT, f"objective1_shap{SUFFIX}_importance.csv"), index=False)
     bc = pd.DataFrame(by_class)
-    bc.round(5).to_csv(os.path.join(OUT, "objective1_shap_by_class.csv"), index=False)
+    bc.round(5).to_csv(os.path.join(OUT, f"objective1_shap{SUFFIX}_by_class.csv"), index=False)
 
     # rank agreement between the three models
     piv = imp.pivot(index="Feature", columns="Model", values="Share of total")
@@ -202,11 +210,15 @@ def figures(imp, bc, classes):
         for s in ("top", "right", "left"):
             ax.spines[s].set_visible(False)
         ax.tick_params(axis="y", length=0)
-    fig.suptitle("SHAP feature importance for the 4-track model (held-out students, 5 folds, top 12)",
+    fig.suptitle(f"SHAP feature importance for the {WHAT} (held-out students, 5 folds, top 12)",
                  x=0.0, ha="left", fontsize=11, fontweight="bold")
-    fig.savefig(os.path.join(OUT, "fig10_shap_importance.png"), dpi=300, bbox_inches="tight",
-                facecolor="white")
+    fig.savefig(os.path.join(OUT, "fig10_shap_importance.png" if TARGET == "E6"
+                             else f"fig13_shap_importance{SUFFIX}.png"), dpi=300,
+                bbox_inches="tight", facecolor="white")
     plt.close(fig)
+    if len(classes) < 3:  # binary: the two classes' SHAP values mirror each other
+        print("saved importance figure (binary target: no per-class heatmap)")
+        return
 
     order = imp[imp["Model"] == base.PROPOSED].nlargest(top, "Share of total")["Feature"].tolist()
     mat = bc.set_index("Feature").loc[order, classes].values * 100

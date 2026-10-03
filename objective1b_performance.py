@@ -9,11 +9,12 @@ Saber 11 scores (+ derived STEM/HUM features) and socioeconomic background.
 
   P1  Saber Pro national quartile (4 classes: Q1..Q4)
   P2  Top national quartile (Q4) vs below (Q1-Q3)  - near-balanced binary task
+  P3  Top national half (Q3-Q4) vs bottom half      - imbalanced (76% top half in this cohort)
 
 No Saber Pro variable (G_SC, PERCENTILE, 2ND_DECILE, QUARTILE, *_PRO) is used as an input.
 Outputs: objective1_<tag>_results.csv, objective1_<tag>_folds.csv, objective1_<tag>_oof.npz.
 
-Usage: python objective1b_performance.py [P1 P2]   (dataset.csv in the working directory)
+Usage: python objective1b_performance.py [P1 P2 P3]   (dataset.csv in the working directory)
 """
 
 import sys
@@ -33,6 +34,9 @@ EXPERIMENTS = {
     "P2": dict(title="P2 SABER PRO TOP QUARTILE vs BELOW from Saber 11 + background",
                target_label="Saber Pro top quartile",
                make=lambda q: np.where(q == 4, "Top quartile", "Below top quartile")),
+    "P3": dict(title="P3 SABER PRO TOP HALF (Q3-Q4) vs BOTTOM HALF from Saber 11 + background",
+               target_label="Saber Pro top half",
+               make=lambda q: np.where(q >= 3, "Top half", "Bottom half")),
 }
 
 

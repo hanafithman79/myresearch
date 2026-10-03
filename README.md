@@ -11,10 +11,10 @@ fitted on the training folds only.
 | --- | --- |
 | `objective1_experiments.py` | Baseline protocol: 21 majors + 4 macro-tracks, 11 models, paired t-tests |
 | `objective1_ablations.py` | E0-E6: direct macro-track, no class weights, grouped majors, no Saber Pro, final protocols |
-| `objective1b_performance.py` | P1/P2: predicting Saber Pro performance from Saber 11 + background |
+| `objective1b_performance.py` | P1/P2/P3: predicting Saber Pro performance from Saber 11 + background |
 | `objective1_rigor.py` | Bootstrap 95% CIs, seed stability, permutation importance |
-| `objective1_repeated_cv.py` | 5x5 repeated CV of the 4-track main result, Nadeau-Bengio corrected tests, figure 12 |
-| `objective1_shap.py` | SHAP importance (Logistic Regression, gradient boosting, proposed model), figures 10-11 |
+| `objective1_repeated_cv.py` | 5x5 repeated CV with Nadeau-Bengio corrected tests: 4 tracks (figure 12) or `P2` Saber Pro (figure 15) |
+| `objective1_shap.py` | SHAP importance (Logistic Regression, gradient boosting, proposed model): 4 tracks (figures 10-11) or `P2` (figure 13) |
 | `objective1_figures.py` | Figures 1-9 |
 
 `dataset.csv` (12,411 students, 45 variables) is included. Run any script from the repository root with `python <script>.py`.
@@ -25,7 +25,7 @@ To redraw the figures:
 
 - `results/` - baseline run (original specification)
 - `results/ablations/` - E0-E6 summaries, per-fold metrics, out-of-fold predictions
-- `results/objective1b/` - P1/P2 Saber Pro performance results
+- `results/objective1b/` - P1/P2/P3 Saber Pro performance results (confusion matrices: figures 7, 16, 17)
 - `results/rigor/` - confidence intervals, seed stability, feature importance
 - `results/repeated_cv/` - 5x5 repeated cross-validation of the main result
 - `results/shap/` - SHAP importance overall and per track
@@ -40,6 +40,8 @@ To redraw the figures:
 
 - Major choice: best macro-track accuracy 45.7%, against 43.6% for always predicting
   the most common track. The features carry little information about the major.
-- Saber Pro performance: top national quartile vs below is predicted with 81.0%
-  accuracy (LSTM on Saber 11 scores), against 50.9% for the majority guess.
+- Objective 1b, Saber Pro performance (5x5 repeated CV): top national quartile vs below is
+  predicted with 79-81% accuracy against a 50.9% majority guess (LSTM 80.9%, Logistic
+  Regression 80.7%, proposed 79.1%). Top half vs bottom half reaches 85.0% against a 76.2%
+  baseline. The English Saber 11 score is the strongest predictor.
 - The dual-branch hybrid matches or trails simpler models on every target.

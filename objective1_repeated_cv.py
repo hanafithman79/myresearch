@@ -15,8 +15,9 @@ Outputs (working directory):
   objective1_repeated_cv_summary.csv  mean, corrected 95% CI, gain over the majority
                                       class, corrected p-values vs majority and vs Proposed
   fig12_repeated_cv.png               25 fold scores per model, mean and corrected 95% CI
-Usage: python objective1_repeated_cv.py [R]
-       python objective1_repeated_cv.py plot   (redraw the figure from the saved CSVs)
+Usage: python objective1_repeated_cv.py [R] [E6|P2]   (default: 5 repeats, 4 macro-tracks)
+       python objective1_repeated_cv.py plot [E6|P2]   (redraw the figure from the saved CSVs)
+P2 repeats the same procedure for the Saber Pro top-quartile target (Objective 1b).
 """
 
 import os
@@ -30,8 +31,21 @@ import objective1_experiments as base
 from objective1_ablations import SABER_PRO_FEATURES
 
 NO_PRO = [f for f in base.TEMPORAL_FEATURES if f not in SABER_PRO_FEATURES]
-ACC = "Macro-Track Top-1 Acc (%)"
-F1 = "Macro-Track Macro-F1"
+TARGETS = {
+    # tag: (metric label, function building the target from the data, file suffix, title)
+    "E6": ("Macro-Track", None, "", "4 macro-tracks"),
+    "P2": ("Saber Pro top quartile", "P2", "_P2", "Saber Pro top quartile vs below"),
+}
+LABEL, MAKE, SUFFIX, TITLE = TARGETS["E6"]
+ACC = f"{LABEL} Top-1 Acc (%)"
+F1 = f"{LABEL} Macro-F1"
+
+
+def configure(tag):
+    """Switch the module to another target (E6 = 4 tracks, P2 = Saber Pro top quartile)."""
+    global LABEL, MAKE, SUFFIX, TITLE, ACC, F1
+    LABEL, MAKE, SUFFIX, TITLE = TARGETS[tag]
+    ACC, F1 = f"{LABEL} Top-1 Acc (%)", f"{LABEL} Macro-F1"
 
 
 def corrected_t(diffs, ratio):
@@ -52,16 +66,21 @@ def corrected_ci(values, ratio):
 
 def main(repeats=5):
     df = base.load_and_prepare(base.DATA_PATH)
+    if MAKE:
+        from objective1b_performance import EXPERIMENTS as PERF
+        df = df[df["QUARTILE"].notna()].reset_index(drop=True)
+        df[base.MACRO_TARGET] = PERF[MAKE]["make"](df["QUARTILE"])
     frames = []
     for r in range(repeats):
         _, folds = base.run_experiment(
             df, label_col=base.MACRO_TARGET, weighted=False, temporal_features=NO_PRO,
-            time_steps=2, title=f"REPEATED CV - repeat {r + 1}/{repeats} (4 macro-tracks)",
+            time_steps=2, title=f"REPEATED CV - repeat {r + 1}/{repeats} ({TITLE})",
+            target_label=LABEL,
             cv_seed=base.SEED + r, seed_offset=100 * r,
             summary_csv=os.devnull, fold_csv=os.devnull)
         frames.append(folds.assign(Repeat=r + 1))
     folds = pd.concat(frames, ignore_index=True)
-    folds.to_csv("objective1_repeated_cv_folds.csv", index=False)
+    folds.to_csv(f"objective1_repeated_cv{SUFFIX}_folds.csv", index=False)
 
     ratio = 1 / (base.N_SPLITS - 1)  # n_test / n_train for k-fold
     key = ["Repeat", "Fold"]
@@ -87,14 +106,16 @@ def main(repeats=5):
             row["p vs Proposed (corrected)"] = f"{p:.3g}"
         rows.append(row)
     summary = pd.DataFrame(rows)
-    summary.to_csv("objective1_repeated_cv_summary.csv", index=False, encoding="utf-8-sig")
+    summary.to_csv(f"objective1_repeated_cv{SUFFIX}_summary.csv", index=False, encoding="utf-8-sig")
     pd.set_option("display.width", 250)
     pd.set_option("display.max_columns", 20)
-    print(f"\nREPEATED CV SUMMARY ({repeats} x {base.N_SPLITS}-fold, corrected resampled t)")
+    print(f"\nREPEATED CV SUMMARY - {TITLE} ({repeats} x {base.N_SPLITS}-fold, corrected resampled t)")
     print(summary.to_string(index=False))
 
 
-def plot(folds_csv="objective1_repeated_cv_folds.csv", out="fig12_repeated_cv.png"):
+def plot(folds_csv=None, out=None):
+    folds_csv = folds_csv or f"objective1_repeated_cv{SUFFIX}_folds.csv"
+    out = out or ("fig12_repeated_cv.png" if not SUFFIX else f"fig15_repeated_cv{SUFFIX}.png")
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -127,7 +148,7 @@ def plot(folds_csv="objective1_repeated_cv_folds.csv", out="fig12_repeated_cv.pn
         ax.set_yticks(range(len(order)))
         ax.set_yticklabels([short[m] for m in order[::-1]])
         ax.get_yticklabels()[order[::-1].index(base.PROPOSED)].set_fontweight("bold")
-        ax.set_title(f"4-track {title}", loc="left", fontweight="bold")
+        ax.set_title(f"{TITLE}: {title}", loc="left", fontweight="bold")
         ax.grid(axis="x", color="#e4e3df", linewidth=0.8)
         ax.set_axisbelow(True)
         for sp in ("top", "right", "left"):
@@ -143,8 +164,12 @@ def plot(folds_csv="objective1_repeated_cv_folds.csv", out="fig12_repeated_cv.pn
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "plot":
+    args = sys.argv[1:]
+    tags = [a.upper() for a in args if a.upper() in TARGETS]
+    configure(tags[0] if tags else "E6")
+    if "plot" in args:
         plot()
     else:
-        main(int(sys.argv[1]) if len(sys.argv) > 1 else 5)
+        nums = [int(a) for a in args if a.isdigit()]
+        main(nums[0] if nums else 5)
         plot()
