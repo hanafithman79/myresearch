@@ -49,7 +49,7 @@ from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassif
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, f1_score, top_k_accuracy_score
-from sklearn.model_selection import StratifiedKFold
+from sklearn.model_selection import StratifiedKFold, train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
@@ -70,6 +70,12 @@ LR = 1e-3
 WEIGHT_DECAY = 1e-2
 DROPOUT = 0.2
 TIME_STEPS = 3
+# Early stopping (optional, same rule for every deep model): a stratified 15% of the
+# TRAINING fold is held out; training stops when its Macro-F1 has not improved for
+# ES_PATIENCE epochs, and the weights of the best epoch are restored.
+ES_MAX_EPOCHS = 50
+ES_PATIENCE = 5
+ES_VAL_FRAC = 0.15
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -480,21 +486,40 @@ def inverse_class_weights(y: np.ndarray, n_classes: int) -> np.ndarray:
     return w.astype(np.float32)
 
 
+def _predict_proba(model, Xs, Xseq):
+    model.eval()
+    probs = []
+    with torch.no_grad():
+        for i in range(0, len(Xs), 1024):
+            xs = torch.from_numpy(Xs[i:i + 1024]).to(DEVICE)
+            xt = torch.from_numpy(Xseq[i:i + 1024]).to(DEVICE)
+            probs.append(F.softmax(model(xs, xt), dim=1).cpu().numpy())
+    return np.vstack(probs)
+
+
 def train_torch_model(model_cls, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va, n_classes, class_w, seed,
-                      return_model=False):
+                      return_model=False, early_stopping=False, info=None):
+    """Train for EPOCHS epochs, or with early stopping on an inner validation split of the
+    training data (never the test fold). `info`, if given, receives the epochs used."""
     set_seed(seed)
     model = model_cls(Xs_tr.shape[1], Xseq_tr.shape[2], n_classes).to(DEVICE)
     criterion = nn.CrossEntropyLoss(weight=torch.tensor(class_w, device=DEVICE))
     optimizer = torch.optim.AdamW(model.parameters(), lr=LR, weight_decay=WEIGHT_DECAY)
 
-    ds = TensorDataset(torch.from_numpy(Xs_tr), torch.from_numpy(Xseq_tr),
-                       torch.from_numpy(y_tr.astype(np.int64)))
+    fit_idx = np.arange(len(y_tr))
+    if early_stopping:
+        strat = y_tr if np.bincount(y_tr).min() >= 2 else None
+        fit_idx, val_idx = train_test_split(fit_idx, test_size=ES_VAL_FRAC, stratify=strat,
+                                            random_state=seed)
+    ds = TensorDataset(torch.from_numpy(Xs_tr[fit_idx]), torch.from_numpy(Xseq_tr[fit_idx]),
+                       torch.from_numpy(y_tr[fit_idx].astype(np.int64)))
     gen = torch.Generator().manual_seed(seed)
     # drop_last avoids a size-1 final batch breaking BatchNorm in train mode
     loader = DataLoader(ds, batch_size=BATCH_SIZE, shuffle=True, generator=gen,
                         drop_last=len(ds) % BATCH_SIZE == 1)
 
-    for _ in range(EPOCHS):
+    best_f1, best_state, best_epoch, wait = -1.0, None, EPOCHS, 0
+    for epoch in range(ES_MAX_EPOCHS if early_stopping else EPOCHS):
         model.train()
         for xs, xt, yb in loader:
             xs, xt, yb = xs.to(DEVICE), xt.to(DEVICE), yb.to(DEVICE)
@@ -502,17 +527,26 @@ def train_torch_model(model_cls, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va, n_classes
             loss = criterion(model(xs, xt), yb)
             loss.backward()
             optimizer.step()
+        if early_stopping:
+            val_pred = _predict_proba(model, Xs_tr[val_idx], Xseq_tr[val_idx]).argmax(axis=1)
+            f1 = f1_score(y_tr[val_idx], val_pred, average="macro", labels=np.arange(n_classes),
+                          zero_division=0)
+            if f1 > best_f1 + 1e-4:
+                best_f1, best_epoch, wait = f1, epoch + 1, 0
+                best_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
+            else:
+                wait += 1
+                if wait >= ES_PATIENCE:
+                    break
+    if early_stopping and best_state is not None:
+        model.load_state_dict(best_state)
+    if info is not None:
+        info["epochs"] = best_epoch
 
-    model.eval()
-    probs = []
-    with torch.no_grad():
-        for i in range(0, len(Xs_va), 1024):
-            xs = torch.from_numpy(Xs_va[i:i + 1024]).to(DEVICE)
-            xt = torch.from_numpy(Xseq_va[i:i + 1024]).to(DEVICE)
-            probs.append(F.softmax(model(xs, xt), dim=1).cpu().numpy())
+    probs = _predict_proba(model, Xs_va, Xseq_va)
     if return_model:
-        return np.vstack(probs), model
-    return np.vstack(probs)
+        return probs, model
+    return probs
 
 
 def train_sklearn_model(factory, X_tr, y_tr, X_va, n_classes, class_weight):
@@ -572,7 +606,7 @@ def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
                    temporal_features=TEMPORAL_FEATURES, time_steps=TIME_STEPS,
                    summary_csv=SUMMARY_CSV, fold_csv=FOLD_CSV, title="OBJECTIVE 1",
                    oof_npz=None, target_label="Macro-Track", models=None, seed_offset=0,
-                   cv_seed=SEED):
+                   cv_seed=SEED, early_stopping=False):
     """Stratified 5-fold CV of every model in MODEL_REGISTRY.
 
     label_col       : column the models are trained on (majors, grouped majors or tracks).
@@ -586,6 +620,8 @@ def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
     models          : optional subset of MODEL_REGISTRY names to run (default: all).
     seed_offset     : added to the torch seeds, for seed-stability reruns.
     cv_seed         : random_state of the fold split (repeated cross-validation).
+    early_stopping  : deep models stop on an inner validation split of the training fold
+                      (ES_MAX_EPOCHS / ES_PATIENCE / ES_VAL_FRAC); classical models unchanged.
     """
     registry = {k: MODEL_REGISTRY[k] for k in models} if models else MODEL_REGISTRY
     t0 = time.time()
@@ -634,15 +670,18 @@ def run_experiment(df, label_col=TARGET, label_to_track=None, weighted=True,
 
         for name, (category, kind, factory) in registry.items():
             ts = time.time()
+            info = {"epochs": np.nan}
             if kind == "sklearn":
                 probs = train_sklearn_model(factory, Xflat_tr, y_tr, Xflat_va, n_classes,
                                             "balanced" if weighted else None)
             else:
                 probs = train_torch_model(factory, Xs_tr, Xseq_tr, y_tr, Xs_va, Xseq_va,
-                                          n_classes, class_w, seed=SEED + fold + seed_offset)
+                                          n_classes, class_w, seed=SEED + fold + seed_offset,
+                                          early_stopping=early_stopping, info=info)
             oof[model_names.index(name), va_idx] = probs
             m = compute_metrics(probs, y_va, ym_va, label_to_macro_idx, n_macro, granular)
-            records.append({"Fold": fold, "Model": name, "Category": category, **m})
+            records.append({"Fold": fold, "Model": name, "Category": category, **m,
+                            "Epochs": info["epochs"]})
             line = (f"  {name:<36s} | Track {m['Macro-Track Top-1 Acc (%)']:6.2f}% "
                     f"F1 {m['Macro-Track Macro-F1']:.4f}")
             if granular:

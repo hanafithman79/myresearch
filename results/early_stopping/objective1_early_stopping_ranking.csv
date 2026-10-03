@@ -1,0 +1,21 @@
+Target,Model,Model Macro-F1 (early stopping),Proposed minus model,p (corrected),Verdict
+4 macro-tracks,Majority Class (reference),0.1517,0.1613,3.02e-18,Proposed better
+4 macro-tracks,Logistic Regression,0.3122,0.0009,0.916,No significant difference
+4 macro-tracks,Random Forest,0.2919,0.0211,0.00607,Proposed better
+4 macro-tracks,HistGradientBoosting,0.3102,0.0029,0.74,No significant difference
+4 macro-tracks,Static MLP Only,0.2905,0.0226,0.00569,Proposed better
+4 macro-tracks,Standalone LSTM,0.2242,0.0888,4.71e-10,Proposed better
+4 macro-tracks,Hybrid 1: MLP + CNN + LSTM,0.3098,0.0032,0.598,No significant difference
+4 macro-tracks,Hybrid 2: MLP + BiLSTM,0.3098,0.0033,0.705,No significant difference
+4 macro-tracks,Hybrid 3: MLP + GRU,0.313,0.0001,0.983,No significant difference
+4 macro-tracks,Hybrid 4: MLP + Transformer,0.3098,0.0033,0.667,No significant difference
+Saber Pro top quartile vs below,Majority Class (reference),0.3373,0.4681,5.77e-36,Proposed better
+Saber Pro top quartile vs below,Logistic Regression,0.8071,-0.0018,0.435,No significant difference
+Saber Pro top quartile vs below,Random Forest,0.8014,0.004,0.106,No significant difference
+Saber Pro top quartile vs below,HistGradientBoosting,0.8002,0.0052,0.129,No significant difference
+Saber Pro top quartile vs below,Static MLP Only,0.6266,0.1787,3.8e-23,Proposed better
+Saber Pro top quartile vs below,Standalone LSTM,0.8072,-0.0018,0.531,No significant difference
+Saber Pro top quartile vs below,Hybrid 1: MLP + CNN + LSTM,0.8062,-0.0008,0.728,No significant difference
+Saber Pro top quartile vs below,Hybrid 2: MLP + BiLSTM,0.8053,0.0,0.992,No significant difference
+Saber Pro top quartile vs below,Hybrid 3: MLP + GRU,0.8063,-0.001,0.691,No significant difference
+Saber Pro top quartile vs below,Hybrid 4: MLP + Transformer,0.7974,0.008,0.000721,Proposed better

@@ -1,0 +1,15 @@
+Target,Model,Macro-F1 fixed 15 epochs,Macro-F1 early stopping,Change,p (corrected),Accuracy fixed (%),Accuracy early stopping (%),Epochs used (mean),Epochs used (range)
+4 macro-tracks,Static MLP Only,0.2818,0.2905,0.0086,0.222,41.83,41.85,9.2,1-25
+4 macro-tracks,Standalone LSTM,0.2166,0.2242,0.0076,0.247,44.17,43.96,12.0,4-31
+4 macro-tracks,Hybrid 1: MLP + CNN + LSTM,0.3028,0.3098,0.007,0.465,43.72,44.23,6.6,1-14
+4 macro-tracks,Hybrid 2: MLP + BiLSTM,0.3044,0.3098,0.0054,0.535,43.93,44.15,7.3,1-19
+4 macro-tracks,Hybrid 3: MLP + GRU,0.3047,0.313,0.0082,0.346,43.68,44.14,9.4,1-22
+4 macro-tracks,Hybrid 4: MLP + Transformer,0.3008,0.3098,0.009,0.199,43.54,43.61,9.4,1-24
+4 macro-tracks,Proposed: MLP + Causal TCN + LSTM,0.3036,0.3131,0.0094,0.252,43.56,44.12,8.3,1-21
+Saber Pro top quartile vs below,Static MLP Only,0.6032,0.6266,0.0235,0.00124,60.38,62.76,3.5,1-10
+Saber Pro top quartile vs below,Standalone LSTM,0.8091,0.8072,-0.002,0.431,80.94,80.73,5.1,1-18
+Saber Pro top quartile vs below,Hybrid 1: MLP + CNN + LSTM,0.7935,0.8062,0.0126,0.000801,79.38,80.64,2.8,1-9
+Saber Pro top quartile vs below,Hybrid 2: MLP + BiLSTM,0.7929,0.8053,0.0124,0.000708,79.32,80.55,3.0,1-9
+Saber Pro top quartile vs below,Hybrid 3: MLP + GRU,0.7913,0.8063,0.015,0.000143,79.15,80.65,2.4,1-6
+Saber Pro top quartile vs below,Hybrid 4: MLP + Transformer,0.7926,0.7974,0.0048,0.0823,79.29,79.75,6.4,2-15
+Saber Pro top quartile vs below,Proposed: MLP + Causal TCN + LSTM,0.7905,0.8054,0.0148,0.0014,79.08,80.56,2.7,1-6

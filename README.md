@@ -14,6 +14,7 @@ fitted on the training folds only.
 | `objective1b_performance.py` | P1/P2/P3: predicting Saber Pro performance from Saber 11 + background |
 | `objective1_rigor.py` | Bootstrap 95% CIs, seed stability, permutation importance |
 | `objective1_repeated_cv.py` | 5x5 repeated CV with Nadeau-Bengio corrected tests: 4 tracks (figure 12) or `P2` Saber Pro (figure 15) |
+| `objective1_early_stopping.py` | Fair early-stopping comparison of all deep models on both targets, figure 20 |
 | `objective1_shap.py` | SHAP importance (Logistic Regression, gradient boosting, proposed model): 4 tracks (figures 10-11) or `P2` (figure 13) |
 | `objective1_figures.py` | Figures 1-9 |
 
@@ -29,6 +30,7 @@ To redraw the figures:
 - `results/rigor/` - confidence intervals, seed stability, feature importance
 - `results/repeated_cv/` - 5x5 repeated cross-validation of the main result
 - `results/shap/` - SHAP importance overall and per track
+- `results/early_stopping/` - repeated CV with early stopping for all deep models, and the comparison
 - `results/figures/` - confusion matrices, heatmaps and metric charts
 
 ## Headline findings
@@ -37,6 +39,10 @@ To redraw the figures:
   majority-class reference (0.304 vs 0.152, corrected p < 1e-15) but not accuracy (43.6%).
   It is statistically tied with Logistic Regression (0.312) and the other hybrids.
 - SHAP: gender is the largest driver of track in every model (17-19% of importance).
+- Early stopping (same rule for all deep models, inner validation split of the training
+  fold): the hybrids overfit at 15 epochs on the Saber Pro task (best epoch about 3).
+  With early stopping the proposed model reaches Macro-F1 0.313 (tracks) and 0.805
+  (Saber Pro) and is not significantly worse than any model on either task.
 
 - Major choice: best macro-track accuracy 45.7%, against 43.6% for always predicting
   the most common track. The features carry little information about the major.

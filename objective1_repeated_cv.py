@@ -18,6 +18,7 @@ Outputs (working directory):
 Usage: python objective1_repeated_cv.py [R] [E6|P2]   (default: 5 repeats, 4 macro-tracks)
        python objective1_repeated_cv.py plot [E6|P2]   (redraw the figure from the saved CSVs)
 P2 repeats the same procedure for the Saber Pro top-quartile target (Objective 1b).
+Add ES to train the deep models with early stopping (e.g. python objective1_repeated_cv.py 5 P2 ES).
 """
 
 import os
@@ -37,14 +38,20 @@ TARGETS = {
     "P2": ("Saber Pro top quartile", "P2", "_P2", "Saber Pro top quartile vs below"),
 }
 LABEL, MAKE, SUFFIX, TITLE = TARGETS["E6"]
+EARLY_STOPPING = False
 ACC = f"{LABEL} Top-1 Acc (%)"
 F1 = f"{LABEL} Macro-F1"
 
 
-def configure(tag):
-    """Switch the module to another target (E6 = 4 tracks, P2 = Saber Pro top quartile)."""
-    global LABEL, MAKE, SUFFIX, TITLE, ACC, F1
+def configure(tag, early_stopping=False):
+    """Switch the module to another target (E6 = 4 tracks, P2 = Saber Pro top quartile),
+    optionally with early stopping for the deep models (outputs get an _ES suffix)."""
+    global LABEL, MAKE, SUFFIX, TITLE, ACC, F1, EARLY_STOPPING
     LABEL, MAKE, SUFFIX, TITLE = TARGETS[tag]
+    EARLY_STOPPING = early_stopping
+    if early_stopping:
+        SUFFIX += "_ES"
+        TITLE += ", early stopping"
     ACC, F1 = f"{LABEL} Top-1 Acc (%)", f"{LABEL} Macro-F1"
 
 
@@ -75,7 +82,7 @@ def main(repeats=5):
         _, folds = base.run_experiment(
             df, label_col=base.MACRO_TARGET, weighted=False, temporal_features=NO_PRO,
             time_steps=2, title=f"REPEATED CV - repeat {r + 1}/{repeats} ({TITLE})",
-            target_label=LABEL,
+            target_label=LABEL, early_stopping=EARLY_STOPPING,
             cv_seed=base.SEED + r, seed_offset=100 * r,
             summary_csv=os.devnull, fold_csv=os.devnull)
         frames.append(folds.assign(Repeat=r + 1))
@@ -115,7 +122,9 @@ def main(repeats=5):
 
 def plot(folds_csv=None, out=None):
     folds_csv = folds_csv or f"objective1_repeated_cv{SUFFIX}_folds.csv"
-    out = out or ("fig12_repeated_cv.png" if not SUFFIX else f"fig15_repeated_cv{SUFFIX}.png")
+    names = {"": "fig12_repeated_cv.png", "_P2": "fig15_repeated_cv_P2.png",
+             "_ES": "fig18_repeated_cv_ES.png", "_P2_ES": "fig19_repeated_cv_P2_ES.png"}
+    out = out or names[SUFFIX]
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -166,7 +175,7 @@ def plot(folds_csv=None, out=None):
 if __name__ == "__main__":
     args = sys.argv[1:]
     tags = [a.upper() for a in args if a.upper() in TARGETS]
-    configure(tags[0] if tags else "E6")
+    configure(tags[0] if tags else "E6", early_stopping="ES" in [a.upper() for a in args])
     if "plot" in args:
         plot()
     else:
