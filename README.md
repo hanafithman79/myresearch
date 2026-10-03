@@ -11,7 +11,7 @@ fitted on the training folds only.
 | --- | --- |
 | `objective1_experiments.py` | Baseline protocol: 21 majors + 4 macro-tracks, 11 models, paired t-tests |
 | `objective1_ablations.py` | E0-E6: direct macro-track, no class weights, grouped majors, no Saber Pro, final protocols |
-| `objective1b_performance.py` | P1/P2/P3: predicting Saber Pro performance from Saber 11 + background |
+| `objective1b_performance.py` | Contrast outcome P1/P2/P3: Saber Pro performance from Saber 11 + background (not a study-pathway target) |
 | `objective1_rigor.py` | Bootstrap 95% CIs, seed stability, permutation importance |
 | `objective1_repeated_cv.py` | 5x5 repeated CV with Nadeau-Bengio corrected tests: 4 tracks (figure 12) or `P2` Saber Pro (figure 15) |
 | `objective1_early_stopping.py` | Fair early-stopping comparison of all deep models on both targets, figure 20 |
@@ -35,6 +35,17 @@ To redraw the figures:
 - `results/early_stopping/` - repeated CV with early stopping for all deep models, and the comparison
 - `results/figures/` - confusion matrices, heatmaps and metric charts
 
+## Target variable
+
+The research predicts the study pathway, recorded as `ACADEMIC_PROGRAM`:
+- **Main target:** `ACADEMIC_PROGRAM` grouped into 4 study tracks (`MACRO_TRACK`).
+- **Granular target:** the 21 programs (16 after grouping programs with fewer than 30 students).
+
+Saber Pro performance (`QUARTILE`, scripts and folders labelled "1b" / P1-P3) is not a
+study-pathway target. It is used only as a contrast outcome, to show how the value of
+dual-branch fusion depends on where the predictive signal lies. The fusion-boundary
+experiment uses semi-synthetic labels on the real inputs for the same purpose.
+
 ## Headline findings
 
 - Main result (4 tracks, 5x5 repeated CV): the proposed model doubles Macro-F1 over the
@@ -48,7 +59,7 @@ To redraw the figures:
 
 - Major choice: best macro-track accuracy 45.7%, against 43.6% for always predicting
   the most common track. The features carry little information about the major.
-- Objective 1b, Saber Pro performance (5x5 repeated CV): top national quartile vs below is
+- Contrast outcome, Saber Pro performance (5x5 repeated CV): top national quartile vs below is
   predicted with 79-81% accuracy against a 50.9% majority guess (LSTM 80.9%, Logistic
   Regression 80.7%, proposed 79.1%). Top half vs bottom half reaches 85.0% against a 76.2%
   baseline. The English Saber 11 score is the strongest predictor.
