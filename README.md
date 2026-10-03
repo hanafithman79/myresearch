@@ -15,6 +15,7 @@ fitted on the training folds only.
 | `objective1_rigor.py` | Bootstrap 95% CIs, seed stability, permutation importance |
 | `objective1_repeated_cv.py` | 5x5 repeated CV with Nadeau-Bengio corrected tests: 4 tracks (figure 12) or `P2` Saber Pro (figure 15) |
 | `objective1_early_stopping.py` | Fair early-stopping comparison of all deep models on both targets, figure 20 |
+| `objective1_fusion_boundary.py` | Controlled fusion-boundary experiment: real inputs, semi-synthetic labels with a controlled background share of signal, figure 21 |
 | `objective1_shap.py` | SHAP importance (Logistic Regression, gradient boosting, proposed model): 4 tracks (figures 10-11) or `P2` (figure 13) |
 | `objective1_figures.py` | Figures 1-9 |
 
@@ -30,6 +31,7 @@ To redraw the figures:
 - `results/rigor/` - confidence intervals, seed stability, feature importance
 - `results/repeated_cv/` - 5x5 repeated cross-validation of the main result
 - `results/shap/` - SHAP importance overall and per track
+- `results/fusion_boundary/` - semi-synthetic fusion-boundary experiment (every fold and the summary)
 - `results/early_stopping/` - repeated CV with early stopping for all deep models, and the comparison
 - `results/figures/` - confusion matrices, heatmaps and metric charts
 
@@ -51,3 +53,8 @@ To redraw the figures:
   Regression 80.7%, proposed 79.1%). Top half vs bottom half reaches 85.0% against a 76.2%
   baseline. The English Saber 11 score is the strongest predictor.
 - The dual-branch hybrid matches or trails simpler models on every target.
+- Fusion-boundary experiment (real inputs, semi-synthetic labels): the gain of fusion over
+  the best single branch follows an inverted U in the share of signal from background
+  variables, about 0 at both extremes and +0.09 to +0.10 Macro-F1 at 40-50%. With a
+  nonlinear signal the proposed model beats Logistic Regression by about 0.09 at every
+  share; with a linear signal Logistic Regression stays slightly ahead.
